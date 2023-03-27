@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="view_res_purchase_order" model="ir.ui.view">
+        <field name="name">res.purchase.order</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page name ="res_purchase_order" string="Purchase Order">
+                    <group>
+                        <field name="res_po" string="Purchase Order" mode="tree">
+                            <tree>
+                                <field name="partner_id" optional="show"/>
+                                <field name="name" optional="show"/>
+                                <field name="purchase_value_po" optional="show"/>
+                                <field name="purchase_validity_po" optional="show"/>
+                                <field name="purchase_value_utilized" optional="show"/>
+                                <field name="purchase_value_remains" optional="show"/>
+                                <field name="attach_po" optional="show"/>
+                            </tree>
+                            <form>
+                                <group>
+                                    <field name="partner_id"/>
+                                    <field name="name"/>
+                                    <field name="purchase_value_po"/>
+                                    <field name="purchase_validity_po"/>
+                                    <field name="purchase_value_utilized"/>
+                                    <field name="purchase_value_remains"/>
+                                    <field name="attach_po"/>
+                                </group>
+                            </form>
+                        </field>
+                    </group>
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+    <record id="purchase_cc_list" model="res.groups">
+        <field name="name">Purchase Order Auto Mailing cc group</field>
+    </record>
+
+    <record id="po_reminder_mail_cron" model="ir.cron">
+        <field name="name">PO Reminders</field>
+        <field name="model_id" ref="model_res_purchase_order"/>
+        <field name="state">code</field>
+        <field name="code">model.send_mail_reminders()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="active" eval="True"/>
+        <field name="doall" eval="False"/>
+    </record>
+</odoo>

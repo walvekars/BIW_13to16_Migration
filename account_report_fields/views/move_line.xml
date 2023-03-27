@@ -1,0 +1,33 @@
+<odoo>
+
+    <record model="ir.ui.view" id="view_account_move_line_form_inherits">
+        <field name="name">account.move.line.form.inherit</field>
+        <field name="inherit_id" ref="account.view_move_line_form"/>
+        <field name="model">account.move.line</field>
+        <field name="arch" type="xml">
+<!--            <field name="quantity" position="after">-->
+<!--                <field name="acc_type" invisible="1"/>-->
+<!--                <field name="acc_grp" invisible="1"/>-->
+<!--            </field>-->
+            <field name="partner_id" position="after">
+                <field name="category_id" widget="many2many_tags"/>
+                <field name="tags_name" invisible="1" />
+            </field>
+        </field>
+    </record>
+     <record model="ir.ui.view" id="view_account_move_line_tree_inherits">
+        <field name="name">account.move.line.tree.inherit</field>
+        <field name="inherit_id" ref="account.view_move_line_tree"/>
+        <field name="model">account.move.line</field>
+        <field name="arch" type="xml">
+<!--            <field name="partner_id" position="after">-->
+<!--                <field name="acc_type" invisible="1"/>-->
+<!--                <field name="acc_grp" invisible="1"/>-->
+<!--            </field>-->
+            <field name="partner_id" position="after">
+                <field name="category_id" widget="many2many_tags"/>
+                <field name="tags_name" invisible="1" />
+            </field>
+        </field>
+    </record>
+</odoo>

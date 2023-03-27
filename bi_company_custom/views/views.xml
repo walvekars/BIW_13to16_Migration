@@ -1,0 +1,15 @@
+<odoo>
+  <data>
+    <record id='comapany_lut_number' model="ir.ui.view">
+      <field name="name">lut_number_date</field>
+      <field name="model">res.company</field>
+      <field name="inherit_id" ref="base.view_company_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='favicon']" position="after">
+              <field name='lut_number' string='LUT NO-ARN No'/>
+              <field name="display_date" string='Date'/>
+          </xpath>
+      </field>
+    </record>
+  </data>
+</odoo>

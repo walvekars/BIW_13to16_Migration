@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="send_mail_custom_wizard_form">
+            <field name="name">send.mail.custom.wizard.form</field>
+            <field name="model">send.mail.wizard</field>
+            <field name="groups_id" eval="[(4,ref('base.group_user'))]"/>
+            <field name="arch" type="xml">
+                <form string="Compose Email Custom">
+                    <group>
+                        <label for="partner_ids" string="To" groups="base.group_user"/>
+                        <div groups="base.group_user">
+                            <field name="partner_ids" widget="many2many_tags" placeholder="Add contacts to notify..."
+                                context="{'force_email':True, 'show_email':True}"/>
+                        </div>
+                        <label for="cc_ids" string="Cc" groups="base.group_user"/>
+                        <div groups="base.group_user">
+                            <field name="cc_ids" widget="many2many_tags"
+                                context="{'force_email':True, 'show_email':True}"/>
+                        </div>
+
+                        <field name="subject" placeholder="Subject..." required="True"/>
+                    </group>
+                    <field name="body" options="{'style-inline': true}"/>
+                    <group col="4">
+                        <field name="attachment_ids" widget="many2many_binary" string="Attach a file" nolabel="1" colspan="2"/>
+<!--                        <field name="template_id" options="{'no_create': True}"/>-->
+                    </group>
+                    <footer>
+                        <button string="Send" name="action_send_mail" type="object" class="btn-primary o_mail_send"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_send_mail_wizard" model="ir.actions.act_window">
+            <field name="name">Compose Email Custom</field>
+            <field name="res_model">send.mail.wizard</field>
+            <field name="binding_model_id" ref="prixgen_custom_aged_receivable_email.model_send_mail_wizard"/>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

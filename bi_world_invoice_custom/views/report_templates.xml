@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+<template id="external_layout_boxed_biworld" inherit_id="web.external_layout_boxed">
+<!--    <xpath expr="//div[@t-attf-class='header o_company_#{company.id}_layout']//h4" position="replace">-->
+
+<!--    </xpath>-->
+    <xpath expr="//div[@t-attf-class='header o_company_#{company.id}_layout']/div[hasclass('o_boxed_header')]" position="before">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h4 class="mt0" style="text-transform:uppercase" t-field="company.report_header"/>
+            </div>
+        </div>
+            </xpath>
+            <xpath expr="//div[@t-attf-class='header o_company_#{company.id}_layout']//div[@name='company_address']" position="inside">
+             <strong>GSTIN:</strong> <span t-field="company.vat"/><br/>
+             <strong>CIN:</strong> <span t-field="company.company_registry"/><br/>
+             <strong>PAN No:</strong> <span t-field="company.partner_id.pan_no"/>
+         </xpath>
+         
+        
+
+
+    <xpath expr="//div[@t-attf-class='footer o_boxed_footer o_company_#{company.id}_layout']" position="replace">
+        <div class="footer o_company_#{company.id}_layout" style="margin-top:200px;">
+            <div class="row">
+                <div class="col-6"/>
+                <div class="col-6 text-center" style="padding-left: 85px;">
+                    <span>BI WORLDWIDE INDIA PRIVATE LIMITED</span><br/>
+                    <div style="padding:20px;"/>
+                    <span>Authorised Signatory</span>
+                </div>
+            </div>
+            <div class="text-center  o_boxed_footer" style="margin-top:4px;">
+                <!-- <ul class="list-inline">
+                    <li t-if="company.phone" class="list-inline-item">Tel: <span t-field="company.phone"/></li>
+                    <li t-if="company.email" class="list-inline-item">Mail: <span t-field="company.email"/></li>
+                    <li t-if="company.website" class="list-inline-item">Web: <span t-field="company.website"/></li>
+                    <li t-if="company.vat" class="list-inline-item"><t t-esc="company.country_id.vat_label or 'Tax ID'"/>: <span t-field="company.vat"/></li>
+                </ul> -->
+                <div t-field="company.report_footer"/>
+                <div t-if="report_type == 'pdf'">
+                    Page: <span class="page"/> / <span class="topage"/>
+                </div>
+            </div>
+        </div>
+    </xpath>
+</template>
+ 
+</odoo>

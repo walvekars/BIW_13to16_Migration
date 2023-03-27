@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_order_form_so_extended" model="ir.ui.view">
+        <field name="name">sale.order.form.so.extended</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header/button[@name='action_cancel']" position="before">
+                <button name="LoadWizardForQuotationToRFQ" string="Create RFQ" type="object"
+                        states="draft,sent,sale,done" class="oe_highlight"/>
+            </xpath>
+            <xpath expr="//notebook[last()]" position="inside">
+                <page string="RFQ Info">
+                    <group>
+                        <group>
+                            <field name="rfq_subject"/>
+                            <field name="rfq_notes" placeholder="Define your terms and conditions..."/>
+                        </group>
+                        <group>
+                            <field name="rfq_incoterm_id"/>
+                            <field name="rfq_payment_term_id"/>
+                            <field name="rfq_fiscal_position_id"/>
+                        </group>
+                    </group>
+                    <group string="Created RFQs">
+                        <field name="created_rfq_ids" nolabel="1" create="false">
+                            <tree>
+                                <field name="name" string="Reference" readonly="1"/>
+                                <field name="date_order" invisible="not context.get('quotation_only', False)"
+                                       optional="show"/>
+                                <field name="date_approve" invisible="context.get('quotation_only', False)"
+                                       optional="show"/>
+                                <field name="partner_id" readonly="1"/>
+                                <field name="company_id" readonly="1" options="{'no_create': True}"
+                                       groups="base.group_multi_company" optional="show"/>
+                                <field name="user_id" optional="show"/>
+                                <field name="origin" optional="show"/>
+                                <field name="amount_untaxed" sum="Total Untaxed amount" string="Untaxed"
+                                       widget="monetary" optional="hide"/>
+                                <field name="amount_total" sum="Total amount" widget="monetary" optional="show"/>
+                                <field name="state" optional="show"/>
+                                <field name="activity_exception_decoration" widget="activity_exception"/>
+                            </tree>
+                        </field>
+                    </group>
+                </page>
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="res_po_move_sale" invisible="1"/>
+
+                <field name="res_purchase_id_sale" domain="[('id', 'in', res_po_move_sale)]"
+                       options="{'no_create_edit': True}"/>
+                <field name="account_value_sale"/>
+                <field name="account_validity_sale"/>
+                <field name="account_utilize_po_sale"/>
+                <field name="account_available_sale"/>
+            </xpath>
+            <xpath expr="//field[@name='client_order_ref']" position="attributes">
+                <attribute name="required">1</attribute>
+                <attribute name="string">Client PO Number</attribute>
+            </xpath>
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="client_order_ref"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="view_account_po_client_order_no" model="ir.ui.view">
+        <field name="name">view.account.po.client.order.no</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='account_available']" position="after">
+                <field name="grn_number_account" widget="many2many_tags" readonly="1"></field>
+                <field name="client_po_acc"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

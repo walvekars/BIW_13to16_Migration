@@ -1,0 +1,290 @@
+<odoo>
+    <template id="report_purchase_order_form_rep">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <div class="header">
+                    <img t-if="o.company_id.logo"
+                         t-att-src="'data:image/png;base64,%s' % to_text(o.company_id.logo)"
+                         height="130pt" width="130pt" float="left" align="left"/>
+                </div>
+                <div class="footer">
+                </div>
+                <table style="width:100%; border: 1pt solid black; border-collapse: collapse;">
+                    <tr>
+                        <td colspan="2">
+                            <center>
+                                <strong>
+                                    <u>PURCHASE ORDER</u>
+                                </strong>
+                            </center>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%;">
+                            <div>
+                                PO NO:
+                                <t t-esc="o.name"/>
+                            </div>
+                            <div>
+                                Date:
+                                <t t-esc="o.date_order"/>
+                            </div>
+                            <div>
+                                Vendor Code :
+                            </div>
+                            <div>
+                                Vendor :<t t-esc="o.partner_id.name"/>,
+                                <br/>
+                                <t t-esc="o.partner_id.street"/>,
+                                <t t-esc="o.partner_id.street2"/>,
+                                <br/>
+                                <t t-esc="o.partner_id.city"/>,<t t-esc="o.partner_id.state_id.name"/>,
+                                <t t-esc="o.partner_id.zip"/>
+
+                            </div>
+                            <div>
+                                Kind Attention:
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                <strong>
+                                    BIW GSTIN
+                                    <t t-esc="o.company_id.vat"/>
+                                </strong>
+                            </div>
+                            <div>
+                                <strong>
+                                    Vendor GSTIN No.:
+                                    <t t-esc="o.partner_id.vat"/>
+                                </strong>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+                <br/>
+                <table style="width:100%; border: 1pt solid black; border-collapse: collapse;">
+                    <th style="border: 1pt solid black;">S No</th>
+                    <th style="border: 1pt solid black;">Item Code</th>
+                    <th style="border: 1pt solid black;">Item Description</th>
+                    <th style="border: 1pt solid black;">HSN/SAC</th>
+                    <th style="border: 1pt solid black;">Qty</th>
+                    <th style="border: 1pt solid black;">Tax</th>
+                    <th style="border: 1pt solid black;">Unit Price</th>
+                    <th style="border: 1pt solid black;">Amount</th>
+                    <!--                        <th style="border: 1pt solid black;">CGST</th>-->
+                    <!--                        <th style="border: 1pt solid black;">SGST</th>-->
+                    <!--                        <th style="border: 1pt solid black;">IGST</th>-->
+                    <!--                        <th style="border: 1pt solid black;">Tax Amt</th>-->
+                    <!--                        <th style="border: 1pt solid black;">Amount</th>-->
+
+                    <t t-set="i" t-value="1"/>
+                    <t t-foreach="o.order_line" t-as="lines">
+                        <tr>
+                            <td style="border: 1pt solid black;">
+                                <span t-esc="i"/>
+                                <t t-set="i" t-value="i+1"/>
+                            </td>
+                            <td style="border: 1pt solid black;">
+                                <t t-esc="lines.product_id.default_code"/>
+                            </td>
+                            <td style="border: 1pt solid black;">
+                                <t t-esc="lines.product_id.name"/>
+                            </td>
+                            <td style="border: 1pt solid black;">
+                                <t t-esc="lines.product_id.l10n_in_hsn_code"/>
+                            </td>
+                            <td style="border: 1pt solid black;">
+                                <t t-esc="lines.product_qty"/>
+                            </td>
+                            <td style="border: 1pt solid black;">
+                                <t t-esc="lines.taxes_id.name"/>
+                            </td>
+                            <td style="border: 1pt solid black;">
+                                <t t-esc="lines.price_unit"/>
+                            </td>
+                            <td style="border: 1pt solid black;">
+                                <t t-esc="lines.price_subtotal"
+                                   t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                            </td>
+                        </tr>
+                    </t>
+                </table>
+                <br/>
+                <t t-set="tot_amt" t-value="0"/>
+
+                <table style="width:30%; border: 1pt solid black; border-collapse: collapse;" align="right">
+                    <tr>
+                        <td style="width:10%; border: 1pt solid black;">
+                            <strong>Subtotal</strong>
+                        </td>
+                        <td style="border: 1pt solid black;">
+                            <t t-esc="o.amount_untaxed"
+                               t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:10%; border: 1pt solid black;">
+                            <span>Taxes</span>
+
+                        </td>
+                        <td style="border: 1pt solid black;">
+                            <t t-esc="o.amount_tax"
+                               t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:10%; border: 1pt solid black;">
+                            <strong>Total</strong>
+                        </td>
+                        <td style="border: 1pt solid black;">
+                            <t t-esc="o.amount_total"
+                               t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                            <t t-set="tot_amt" t-value="o.amount_total"/>
+
+                        </td>
+                    </tr>
+                </table>
+                <br/>
+                <br/>
+                <table style="width:100%; border: 1pt solid black; border-collapse: collapse; border-bottom:0px">
+                    <tr>
+                        <td>
+                            <span style="padding: 5px;">
+                                <strong>
+                                    Amount (In Words):
+                                    <br/>
+                                    <t t-esc="o.amt_to_text(round(tot_amt))"/>
+                                    ONLY
+                                </strong>
+                            </span>
+                        </td>
+                    </tr>
+                    <br/>
+                    <tr>
+                        <td>
+                            <span style="padding: 5px;">
+                                <u>SPECIAL INSTRUCTIONS</u>
+                            </span>
+                        </td>
+                    </tr>
+                    <br/>
+
+                    <tr>
+                        <td>
+                            <span>Payment Terms:
+                                <t t-esc="o.payment_term_id.name"/>
+                            </span>
+                            <br/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span>Delivery Terms:</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p style="padding: 5px;">
+                                BIW India will not accept stock carrying manufacturing date of prior to 12
+                                months
+                                from
+                                stock delivery date.
+                                <br/>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+                <table style="width:100%; border: 1pt solid black; border-collapse: collapse;  border-top :0px; border-bottom: 0px;">
+                    <tr>
+                        <td>
+                            <strong>
+                                <i>
+                                    <u>PO Terms and Conditions:</u>
+                                </i>
+                            </strong>
+                            <p>Quote BIW India's P.O. Number in your Invoice. The word "Tax Invoice"
+                                should appear in a prominent place in the
+                                Invoice and your GSTIN number should be mentioned.
+                            </p>
+                            <p>
+                                BI Worldwide India Private Limited Name and Address and GSTIN number, Price of
+                                product, Quantity, Rate and
+                                value should be mentioned separately. IGST/CGST/SGST Charges &amp; the rate at
+                                which
+                                it is charged should be
+                                shown separately.
+                            </p>
+                            <p>
+                                Material should be delivered along with Invoice &amp; BIW's P.O. to the below
+                                address from Monday to Saturday
+                                between 9:30 am to 5:00 pm.
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+                <table style="width:100%; border: 1pt solid black; border-collapse: collapse;  border-bottom: 0px; border-top :0px;">
+                    <td>
+                        <p>
+                            <br/>
+                            Delivery TAT Specified should be adhered strictly. If the quality of the product
+                            delivered is not upto the standard
+                            then it will be rejected either in full or partial and any defective should be
+                            replaced immediately.
+                        </p>
+                        <p>
+                            It is the responsibility of the supplier to deliver the material as per the PO
+                            at
+                            our respective warehouse. Any loss
+                            or misplacement during transit should be borne by the vendor.
+                        </p>
+                        <p>
+                            Sample Quality check will be done within 2 days of delivery and in case of any
+                            defects supplier has to take back
+                            the defective stock and replace within 2 days.
+                        </p>
+                    </td>
+                </table>
+                <table style="width:100%; border: 1pt solid black; border-collapse: collapse; border-top :0px;">
+                    <tr>
+                        <td>
+                            <strong>Delivery Address:</strong>
+                            <br/>
+                            BI WORLDWIDE INDIA PRIVATE LIMITED
+                            <br/>
+                            #28, Ulsoor road, Ulsoor
+                            <br/>
+                            Bangalore 560042
+                            <br/>
+                            Karnataka KA
+                            <br/>
+                            State Code: 29
+                            <br/>
+                            <br/>
+                            For BI Worldwide India Pvt Ltd
+                            <br/>
+                            Authorized Signatory
+                            <br/>
+                            <br/>
+                        </td>
+                    </tr>
+                </table>
+            </t>
+        </t>
+    </template>
+
+
+    <record id="action_report_purchase_order_form" model="ir.actions.report">
+        <field name="name">PO</field>
+        <field name="model">purchase.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">po_from_quotation.report_purchase_order_form_rep</field>
+        <field name="report_file">po_from_quotation.report_purchase_order_form_rep</field>
+        <field name="binding_model_id" ref="purchase.model_purchase_order"/>
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>

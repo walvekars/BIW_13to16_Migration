@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StatusEnquiry>
+  <ProfileID></ProfileID>
+  <Key>
+    <ReferenceID></ReferenceID>
+    <MessageID></MessageID>
+    <PmtInfID></PmtInfID>
+    <InstructionID></InstructionID>
+    <EndToEndID></EndToEndID>
+  </Key>
+</StatusEnquiry>

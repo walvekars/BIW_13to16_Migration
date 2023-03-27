@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="view_account_po" model="ir.ui.view">
+        <field name="name">view.account.po</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='ref']" position="after">
+                <field name="res_po_move" invisible="1"/>
+<!--                <field name="purchase_id" domain="[('id', 'in', res_po_move)]" options="{'no_create_edit': True}"/>-->
+                <field name="res_purchase_id" domain="[('id', 'in', res_po_move)]" options="{'no_create_edit': True}"/>
+                <field name="account_value"/>
+                <field name="account_validity"/>
+                <field name="account_utilize_po"/>
+                <field name="account_available"/>
+            </xpath>
+        </field>
+    </record>
+
+<!--    <record id="ir_action_move_po_reference_new" model="ir.actions.server">-->
+<!--        <field name="name">New PO Reference</field>-->
+<!--        <field name="type">ir.actions.server</field>-->
+<!--        <field name="model_id" ref="account.model_account_move"/>-->
+<!--        <field name="state">code</field>-->
+<!--        <field name="code">-->
+<!--            if records:-->
+<!--            action = records.new_po_field()-->
+<!--        </field>-->
+<!--        <field name="binding_model_id" ref="account.model_account_move"/>-->
+<!--    </record>-->
+</odoo>

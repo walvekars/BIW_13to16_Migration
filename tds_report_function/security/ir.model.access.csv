@@ -1,0 +1,14 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+,,,,,,,
+access_account_tds_section_manager,account.tds.section.manager,model_account_tds_section,account.group_account_manager,1,1,1,1
+access_account_tds_manager,account.tds,model_account_tds,account.group_account_manager,1,1,1,1
+access_tds_nature_deduction_manager,tds.nature.deduction,model_tds_nature_deduction,account.group_account_manager,1,1,1,1
+access_account_tds_section_user,account.tds.section.manager,model_account_tds_section,account.group_account_user,1,1,1,0
+access_account_tds_user,account.tds,model_account_tds,account.group_account_user,1,1,1,0
+access_tds_nature_deduction_user,tds.nature.deduction,model_tds_nature_deduction,account.group_account_user,1,1,1,0
+access_assessee_code_user,assesee.code,model_assessee_code,account.group_account_user,1,1,1,0
+access_assessee_code_manager,assesee.code,model_assessee_code,account.group_account_manager,1,1,1,1
+access_concession_code_user,concession.code,model_concession_code,account.group_account_user,1,1,1,0
+access_concession_code_manager,concession.code,model_concession_code,account.group_account_manager,1,1,1,1
+access_tax_deduction_source,tax.deduction.source,model_tax_deduction_source,account.group_account_user,1,1,1,0
+access_tax_deduction_source_manager,tax.deduction.source,model_tax_deduction_source,account.group_account_manager,1,1,1,1

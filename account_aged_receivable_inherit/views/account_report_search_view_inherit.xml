@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+<!--     <template id="account_reports_backend" inherit_id="web.assets_backend" active="True">-->
+<!--        <xpath expr="." position="inside">-->
+<!--            <script type="text/javascript" src="/account_aged_receivable_inherit/static/src/js/aged_receivable_inherit.js"></script>-->
+<!--        </xpath>-->
+<!--    </template>-->
+
+
+
+    <template id="search_template_filter_all" inherit_id="account_reports.search_template">
+        <xpath expr="//div[hasclass('o_account_reports_filter_partner')]" position="after">
+            <div class="btn-group o_dropdown o_account_reports_filter_all" t-if="options.get('filter_all')">
+                <t t-call="account_aged_receivable_inherit.search_template_filter_all_m2m"/>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="search_template_filter_all_m2m">
+        <button t-if="options.get('filter_all')" type="button" class="o_dropdown_toggler_btn btn btn-secondary dropdown-toggle account_all_filter" data-toggle="dropdown">
+            <span class="fa fa-folder-open"/> Filter
+        </button>
+        <ul class="dropdown-menu o_filter_menu" role="menu">
+            <li class="o_account_report_search js_account_filter_all_m2m"/>
+        </ul>
+    </template>
+
+    <template id="search_template_filter_all_1" inherit_id="account_reports.search_template">
+        <xpath expr="//div[hasclass('o_account_reports_filter_partner')]" position="replace">
+            <t t-if="options.get('filter_all') == None">
+                <div class="btn-group o_dropdown o_account_reports_filter_partner" t-if="options.get('partner')">
+                    <t t-call="account_reports.search_template_partner"/>
+                </div>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="search_template_filter_all_2" inherit_id="account_reports.search_template">
+        <xpath expr="//div[hasclass('o_account_reports_filter_analytic')]" position="replace">
+            <t t-if="options.get('filter_all') == None">
+                <div class="btn-group o_dropdown o_account_reports_filter_analytic" t-if="options.get('analytic')">
+                    <t t-call="account_reports.search_template_analytic"/>
+                </div>
+            </t>
+        </xpath>
+    </template>
+
+
+</odoo>

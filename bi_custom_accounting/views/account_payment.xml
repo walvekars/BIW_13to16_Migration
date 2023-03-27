@@ -1,0 +1,67 @@
+<odoo>
+
+    <record model="ir.ui.view" id="view_account_payment_form_inherits_2">
+        <field name="name">account.payment.form.inherits_2</field>
+        <field name="inherit_id" ref="account.view_account_payment_form"/>
+        <field name="model">account.payment</field>
+        <field name="arch" type="xml">
+            <field name="payment_type" position="after">
+                <field name="analytic_account_id"  required="1"/>
+                <field name="cost_center_id"/>
+            </field>
+        </field>
+    </record>
+
+   <record model="ir.ui.view" id="view_account_payment_form_inherits_4">
+        <field name="name">account.payment.form.inherits_4</field>
+        <field name="inherit_id" ref="account.view_account_payment_form"/>
+        <field name="model">account.payment</field>
+        <field name="arch" type="xml">
+            <field name="journal_id" position="after">
+                <field name="client_name"/>
+                <field name="invoice_number"/>
+                <field name="requester_name"/>
+            </field>
+        </field>
+   </record>
+
+    <record model="ir.ui.view" id="view_account_move_line_form_inherits_3">
+        <field name="name">account.move.line.form.inherit_2</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="model">account.move</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='analytic_distribution']" position="attributes">
+                 <attribute name="required">1</attribute>
+            </xpath>
+<!--            <xpath expr="//field[@name='line_ids']/tree/field[@name='analytic_distribution']" position="attributes">-->
+<!--                 <attribute name="required">[('display_type', 'not in', ('line_section', 'line_note'))]</attribute>-->
+<!--            </xpath>-->
+        </field>
+    </record>
+
+<!--    <record model="ir.ui.view" id="view_account_payment_form_inherits_3">-->
+<!--        <field name="name">account.payment.form.inherits_3</field>-->
+<!--        <field name="inherit_id" ref="account.view_account_payment_invoice_form"/>-->
+<!--        <field name="model">account.payment</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//sheet//field[@name='journal_id']" position="after">-->
+<!--                <field name="analytic_account_id"  required="1"/>-->
+<!--                <field name="cost_center_id"/>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+
+    <record model="ir.ui.view" id="view_bank_account_form_inherits">
+        <field name="name">bank.account.form.inherits</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <field name="property_account_payable_id" position="after">
+                <field name="invoice_partner_bank_id"/>
+            </field>    
+        </field>
+    </record>
+
+
+
+</odoo>

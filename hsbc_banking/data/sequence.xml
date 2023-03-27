@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="hsbc_bulk_transaction_seq" model="ir.sequence">
+        <field name="name">HSBC Bulk API Transaction Sequence</field>
+        <field name="code">hsbc.account.payment</field>
+        <field name="prefix">BIWHSBC</field>
+        <field name="padding">6</field>
+    </record>
+</odoo>

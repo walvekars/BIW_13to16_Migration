@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="empty_symbol" model="res.currency">
+            <field name="name">NoS</field>
+            <field name="active">1</field>
+<!--            <field name="excel_format">_ * #,##0.00_) ;_ * - #,##0.00_) ;_ * "-"??_) ;_ @_ </field>-->
+            <field name="symbol"> </field>
+            <field name="rounding">1</field>
+        </record>
+        <template id="aged_receivable_email_template">
+            <t t-call="account_reports.filter_info_template"/>
+                <table class="table table-bordered" width="100%" style="border:1px solid black; margin-bottom:2px; margin-top:2px;font-size:12px;">
+                    <thead>
+<!--                        <tr bgcolor="orange"  bgcolor="#fabf8f" >-->
+                        <tr style="font-weight: bold;">
+                            <th style="color:dodgerblue;border:1px solid black; width: 150px;">Client</th>
+                            <th style="color:dodgerblue;border:1px solid black; width: 150px;">Analytic Account</th>
+                            <th style="color:dodgerblue;border:1px solid black; width: 100px; width: 100px;">Credit Period</th>
+                            <th style="color:dodgerblue;border:1px solid black; width: 100px;">Within the Due</th>
+                            <th style="color:dodgerblue;border:1px solid black; width: 100px;"> &lt; 30 days </th>
+                            <th style="color:dodgerblue;border:1px solid black; width: 100px;"> > 30 days </th>
+                            <th style="color:dodgerblue;border:1px solid black; width: 100px;"> > 60 days </th>
+                            <th style="color:dodgerblue;border:1px solid black; width: 100px;"> > 90 days </th>
+                            <th style="color:dodgerblue;border:1px solid black; width: 100px;"> > 180 days </th>
+                            <th style="color:dodgerblue;border:1px solid black; width: 100px;"> > 365 days </th>
+                            <th style="color:dodgerblue;border:1px solid black; width: 100px;">Grand Total</th>
+                            <th style="color:dodgerblue;border:1px solid black; width: 100px;">Collection During last week</th>
+                            <th style="color:dodgerblue;border:1px solid black; width: 100px;"> > 90 days (Payment) </th>
+                            <th style="color:dodgerblue;border:1px solid black; width: 100px;"> > 180 days (Payment) </th>
+                            <th style="color:dodgerblue;border:1px solid black; width: 100px;"> > 365 days (Payment) </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-set="currency" t-value="self.env.ref('prixgen_custom_aged_receivable_email.empty_symbol')"/>
+                        <t t-foreach="lines[:-1]" t-as="line">
+                            <tr>
+                                <t t-if="self.env['res.partner'].browse(line['partner_id']).category_id">
+                                    <td style="border:1px solid black; width: 150px;"><t t-esc="self.env['res.partner'].browse(line['partner_id']).category_id[0].name"/></td>
+                                </t>
+                                <t t-else="">
+                                    <td style="border:1px solid black; width: 150px;"><t t-esc="line['name'][:line['name'].find(' ')]"/></td>
+                                </t>
+                                <td style="border:1px solid black; width: 100px;"><t t-esc="self.env['res.partner'].browse(line['partner_id']).contact_analytic_account_id.name"/></td>
+                                <td style="border:1px solid black; width: 100px;"><t t-esc="self.env['res.partner'].browse(line['partner_id']).property_payment_term_id.name"/></td>
+<!--                                <td style="border:1px solid black; width: 100px;"><t t-esc="self.env['res.partner'].search([('name', '=', line['name'])], limit=1).property_payment_term_id.name"/></td>-->
+                                <td style="border:1px solid black; width: 100px;" align="right"><t t-esc="line['columns'][6]['no_format']" t-options="{'widget': 'monetary', 'display_currency': currency}"/></td>
+                                <td style="border:1px solid black; width: 100px;" align="right"><t t-esc="line['columns'][7]['no_format']" t-options="{'widget': 'monetary', 'display_currency': currency}"/></td>
+                                <td style="border:1px solid black; width: 100px;" align="right"><t t-esc="line['columns'][8]['no_format']" t-options="{'widget': 'monetary', 'display_currency': currency}"/></td>
+                                <td style="border:1px solid black; width: 100px;" align="right"><t t-esc="line['columns'][9]['no_format']" t-options="{'widget': 'monetary', 'display_currency': currency}"/></td>
+                                <td style="border:1px solid black; width: 100px;" align="right"><t t-esc="line['columns'][10]['no_format']" t-options="{'widget': 'monetary', 'display_currency': currency}"/></td>
+                                <td style="border:1px solid black; width: 100px;" align="right"><t t-esc="line['columns'][11]['no_format']" t-options="{'widget': 'monetary', 'display_currency': currency}"/></td>
+                                <td style="border:1px solid black; width: 100px;" align="right"><t t-esc="line['columns'][12]['no_format']" t-options="{'widget': 'monetary', 'display_currency': currency}"/></td>
+                                <td style="border:1px solid black; width: 100px;" align="right"><t t-esc="line['columns'][13]['no_format']" t-options="{'widget': 'monetary', 'display_currency': currency}"/></td>
+                                <td style="border:1px solid black; width: 100px;" align="right"><t t-esc="line['tag_amt']" t-options="{'widget': 'monetary', 'display_currency': currency}"/></td>
+                                <td style="border:1px solid black; width: 100px;" align="right"><t t-esc="line['week_90']" t-options="{'widget': 'monetary', 'display_currency': currency}"/></td>
+                                <td style="border:1px solid black; width: 100px;" align="right"><t t-esc="line['week_180']" t-options="{'widget': 'monetary', 'display_currency': currency}"/></td>
+                                <td style="border:1px solid black; width: 100px;" align="right"><t t-esc="line['week_365']" t-options="{'widget': 'monetary', 'display_currency': currency}"/></td>
+                            </tr>
+                        </t>
+                        <t t-set="l" t-value="lines[-1]"/>
+                        <tr  style="font-weight: bold">
+                            <td style="color:peru;border:1px solid black; width: 150px;">Grand Total</td>
+                            <td style="color:peru;border:1px solid black; width: 100px;">  </td>
+                            <td style="color:peru;border:1px solid black; width: 100px;">  </td>
+                            <td style="color:peru;border:1px solid black; width: 100px;" align="right"><t t-esc="l['columns'][6]['no_format']" t-options="{'widget': 'monetary', 'display_currency': currency}"/></td>
+                            <td style="color:peru;border:1px solid black; width: 100px;" align="right"><t t-esc="l['columns'][7]['no_format']" t-options="{'widget': 'monetary', 'display_currency': currency}"/></td>
+                            <td style="color:peru;border:1px solid black; width: 100px;" align="right"><t t-esc="l['columns'][8]['no_format']" t-options="{'widget': 'monetary', 'display_currency': currency}"/></td>
+                            <td style="color:peru;border:1px solid black; width: 100px;" align="right"><t t-esc="l['columns'][9]['no_format']" t-options="{'widget': 'monetary', 'display_currency': currency}"/></td>
+                            <td style="color:peru;border:1px solid black; width: 100px;" align="right"><t t-esc="l['columns'][10]['no_format']" t-options="{'widget': 'monetary', 'display_currency': currency}"/></td>
+                            <td style="color:peru;border:1px solid black; width: 100px;" align="right"><t t-esc="l['columns'][11]['no_format']" t-options="{'widget': 'monetary', 'display_currency': currency}"/></td>
+                            <td style="color:peru;border:1px solid black; width: 100px;" align="right"><t t-esc="l['columns'][12]['no_format']" t-options="{'widget': 'monetary', 'display_currency': currency}"/></td>
+                            <td style="color:peru;border:1px solid black; width: 100px;" align="right"><t t-esc="l['columns'][13]['no_format']" t-options="{'widget': 'monetary', 'display_currency': currency}"/></td>
+                            <td style="color:green;border:1px solid black; width: 100px;" align="right"><t t-esc="l['tag_amt']" t-options="{'widget': 'monetary', 'display_currency': currency}"/></td>
+                            <td style="color:green;border:1px solid black; width: 100px;" align="right"><t t-esc="l['week_90']" t-options="{'widget': 'monetary', 'display_currency': currency}"/></td>
+                            <td style="color:green;border:1px solid black; width: 100px;" align="right"><t t-esc="l['week_180']" t-options="{'widget': 'monetary', 'display_currency': currency}"/></td>
+                            <td style="color:green;border:1px solid black; width: 100px;" align="right"><t t-esc="l['week_365']" t-options="{'widget': 'monetary', 'display_currency': currency}"/></td>
+                        </tr>
+                    </tbody>
+                </table>
+        </template>
+
+        <record id="group_analytic_account_hari" model="res.groups">
+            <field name="name">Analytic Account - H</field>
+            <field name="category_id" ref="base.module_category_accounting_accounting"/>
+<!--            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>-->
+        </record>
+</odoo>

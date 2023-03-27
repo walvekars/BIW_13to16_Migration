@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_rfq_from_quotation_wizard" model="ir.ui.view">
+        <field name="name">rfq.from.quotation.wizard</field>
+        <field name="model">rfq.from.quotation</field>
+        <field name="arch" type="xml">
+            <form string="Create RFQ">
+                <div class="oe_title">
+                    <h1>
+                        <field name="quotation_id" readonly="1" edit="false"/>
+                    </h1>
+                </div>
+                <group>
+                    <group>
+                        <field name="state" invisible="1"/>
+                        <field name="raise_rfq_for"/>
+                        <field name="rfq_vendor_id"/>
+                        <field name="rfq_partner_ref"/>
+                        <field name="rfq_subject"/>
+                    </group>
+                    <group>
+                        <field name="rfq_incoterm_id"/>
+                        <field name="rfq_payment_term_id"/>
+                        <field name="rfq_fiscal_position_id"/>
+                        <field name="rfq_currency_id"/>
+                    </group>
+                </group>
+                <field name="rfq_notes" placeholder="Define your terms and conditions ..."/>
+                <group>
+		            <field name="order_lines" widget="section_and_note_one2many" nolabel="1">
+						<tree editable="bottom" decoration-info="(not display_type)" create="false">
+                            <control>
+                                <create name="add_product_control" string="Add a product"/>
+                                <create name="add_section_control" string="Add a section" context="{'default_display_type': 'line_section'}"/>
+                                <create name="add_note_control" string="Add a note" context="{'default_display_type': 'line_note'}"/>
+                            </control>
+                            <field name="display_type" invisible="1"/>
+							<field name="line_id" invisible='1'/><!--O2M-->
+                            <field name="so_line_id" invisible='1'/>
+							<field name="select_item"/>
+							<field name="product_id" attrs="{'required': [('display_type', '=', False)]}"/>
+                            <field name="name" attrs="{'required': [('display_type', '=', False)]}"/>
+							<field name="remaining_qty" attrs="{'required': [('display_type', '=', False)]}"/>
+							<field name="product_uom_qty" attrs="{'required': [('display_type', '=', False)]}"/>
+							<field name="product_uom" attrs="{'required': [('display_type', '=', False)]}"/>
+							<field name="price_unit" attrs="{'required': [('display_type', '=', False)]}"/>
+						</tree>
+					</field>
+	        	</group>
+	            <footer>
+	                <button string="Confirm" name="CreateRFQ" type="object" class="oe_highlight"/>
+	                or
+	                <button string="Cancel" class="oe_link" special="cancel" />
+	            </footer>
+           </form>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,40 @@
+<odoo>
+  
+  <record id="view_move_form_bi" model="ir.ui.view">
+    <field name="name">view.move.form.bi</field>
+    <field name="model">account.move</field>
+    <field name="inherit_id" ref="account.view_move_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='currency_id']" position="after">
+        <field name="from_omt"/>
+        <field name="omt_inv_number" attrs="{'invisible': [('from_omt', '=', False)]}"/>
+      </xpath>
+      <xpath expr="//notebook/page/field/tree/field[@name='name']" position='after'>
+        <field name="program"/>
+        <field name="points"/>
+      </xpath>
+      <xpath expr="//notebook/page/field[@name='line_ids']/tree/field[@name='name']" position='after'>
+        <field name="program" invisible="1"/>
+        <field name="points" invisible="1"/>
+      </xpath>
+      <xpath expr="//field[@name='line_ids']" position="before">
+        <field name="able_to_modify_product" invisible="1"/>
+      </xpath>
+      <xpath expr="//field[@name='line_ids']" position="attributes">
+          <attribute name="attrs">{'readonly': [('able_to_modify_product', '=', False), ('state', '!=', 'draft')]}</attribute>
+      </xpath>
+    </field>
+  </record>
+
+  <record id="view_payment_form_bi" model="ir.ui.view">
+    <field name="name">view.payment.form.bi</field>
+    <field name="model">account.cost.center</field>
+    <field name="inherit_id" ref="account_cost_center.account_cost_center_form"/>
+    <field name="arch" type="xml">
+      <field name="name" position="after">
+        <field name="account_id" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
+      </field>  
+    </field>
+  </record>
+
+</odoo>

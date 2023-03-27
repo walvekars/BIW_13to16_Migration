@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access.hsbc.account.payment,access_hsbc_account_payment,hsbc_banking.model_hsbc_account_payment,,1,1,1,1
+access.hsbc.api.log,access_hsbc_api_log,hsbc_banking.model_hsbc_api_log,,1,1,1,1

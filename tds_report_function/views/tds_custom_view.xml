@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	
+
+	<record id="view_account_tds_list" model="ir.ui.view">
+		<field name="name">account.tds.tree</field>
+		<field name="model">account.tds</field>
+		<field name="arch" type="xml">
+		    <tree string="TDS Account" >
+		        <field name="name" />
+		    </tree>
+		</field>
+	</record>
+
+
+	<record id="view_account_tds_form" model="ir.ui.view">
+		<field name="name">account.tds.form</field>
+		<field name="model">account.tds</field>
+		<field name="arch" type="xml">
+		  <form string="Account TDS" class="o_sale_order">
+		  	<group>
+			  	<group>
+			  		 <field name="name" />
+			  	</group>
+		  	</group>
+		  </form>
+		</field>
+	</record>
+
+
+	<record id="action_tds_form" model="ir.actions.act_window">
+		<field name="name">TDS </field>
+		<field name="res_model">account.tds</field>
+		<field name="view_mode">tree,form</field>
+		<field name="view_id" ref="view_account_tds_list"/>
+	</record>
+
+	<record id="view_account_tds_section_list" model="ir.ui.view">
+		<field name="name">account.tds.section.tree</field>
+		<field name="model">account.tds.section</field>
+		<field name="arch" type="xml">
+		    <tree string="TDS Section" >
+		        <field name="name" />
+		    </tree>
+		</field>
+	</record>
+
+
+	<record id="view_account_tds_form_section" model="ir.ui.view">
+		<field name="name">account.tds.section.form</field>
+		<field name="model">account.tds.section</field>
+		<field name="arch" type="xml">
+		  <form string="TDS Section" class="o_sale_order">
+		  	<group>
+			  	<group>
+			  		 <field name="name" />
+			  	</group>
+		  	</group>
+		  </form>
+		</field>
+	</record>
+
+	<record id="action_tds_form_section" model="ir.actions.act_window">
+		<field name="name">TDS Section</field>
+		<field name="res_model">account.tds.section</field>
+		<field name="view_mode">tree,form</field>
+		<field name="view_id" ref="view_account_tds_section_list"/>
+	</record>
+
+
+
+
+	<record id="view_tds_nature_deduction_list" model="ir.ui.view">
+		<field name="name">tds.nature.deduction.tree</field>
+		<field name="model">tds.nature.deduction</field>
+		<field name="arch" type="xml">
+		    <tree string="TDS Account" >
+		        <field name="name" />
+		    </tree>
+		</field>
+	</record>
+
+
+	<record id="view_tds_nature_deduction_form" model="ir.ui.view">
+		<field name="name">tds.nature.deduction.form</field>
+		<field name="model">tds.nature.deduction</field>
+		<field name="arch" type="xml">
+		  <form string="Account TDS" class="o_sale_order">
+		  	<group>
+			  	<group>
+			  		 <field name="name" />
+			  	</group>
+		  	</group>
+		  </form>
+		</field>
+	</record>
+
+
+	<record id="action_tds_nature_deduction_form" model="ir.actions.act_window">
+		<field name="name">TDS Nature Deduction</field>
+		<field name="res_model">tds.nature.deduction</field>
+		<field name="view_mode">tree,form</field>
+		<field name="view_id" ref="view_tds_nature_deduction_list"/>
+	</record>
+
+
+
+	<record id="view_assessee_code_list" model="ir.ui.view">
+		<field name="name">assessee.code.tree</field>
+		<field name="model">assessee.code</field>
+		<field name="arch" type="xml">
+		    <tree string="Assessee Code" >
+		        <field name="name" />
+		    </tree>
+		</field>
+	</record>
+
+
+	<record id="view_assessee_code_form" model="ir.ui.view">
+		<field name="name">assessee.code.form</field>
+		<field name="model">assessee.code</field>
+		<field name="arch" type="xml">
+		  <form string="Assessee Code" class="o_sale_order">
+		  	<group>
+			  	<group>
+			  		 <field name="name" />
+			  	</group>
+		  	</group>
+		  </form>
+		</field>
+	</record>
+
+
+	<record id="action_assessee_code_form" model="ir.actions.act_window">
+		<field name="name">Assessee Code</field>
+		<field name="res_model">assessee.code</field>
+		<field name="view_mode">tree,form</field>
+		<field name="view_id" ref="view_assessee_code_list"/>
+	</record>
+
+
+	<record id="view_concession_code_list" model="ir.ui.view">
+		<field name="name">concession.code.tree</field>
+		<field name="model">concession.code</field>
+		<field name="arch" type="xml">
+		    <tree string="Concession Code" >
+		        <field name="name" />
+		    </tree>
+		</field>
+	</record>
+
+
+	<record id="view_concession_code_form" model="ir.ui.view">
+		<field name="name">concession.code.form</field>
+		<field name="model">concession.code</field>
+		<field name="arch" type="xml">
+		  <form string="Concession Code" class="o_sale_order">
+		  	<group>
+			  	<group>
+			  		 <field name="name" />
+			  	</group>
+		  	</group>
+		  </form>
+		</field>
+	</record>
+
+
+	<record id="action_concession_code_form" model="ir.actions.act_window">
+		<field name="name">Concession Code</field>
+		<field name="res_model">concession.code</field>
+		<field name="view_mode">tree,form</field>
+		<field name="view_id" ref="view_concession_code_list"/>
+	</record>
+
+
+
+
+	<record id="view_tax_form_inherit_tds" model="ir.ui.view">
+		<field name="name">account.tax.form</field>
+		<field name="model">account.tax</field>
+		<field name="inherit_id" ref="account.view_tax_form"/>
+		<field name="arch" type="xml">
+			<xpath expr="//form/sheet/group/group" position="inside">
+				<field name="tds_active" />
+			</xpath>
+			<xpath expr="//form/sheet/notebook/page[2]" position='after'>
+	    	<page string='TDS Configuration'  attrs="{'invisible': [('tds_active', '=', False)]}">
+				<group >
+					<group>
+					    <field name="tds_group_id" />
+					    <field name="account_tds_section_id" />
+					    <field name="tds_nature_id" />
+					</group>
+					<group>
+					    <field name="assessee_code_id" />
+					    <field name="concession_code_id" />
+					    <field name="consession_from" />
+					    <field name="consession_to" />
+					    <field name="pan_no_in" />
+					</group>
+				</group>
+			</page>
+			</xpath>
+		</field>
+	</record>
+
+
+
+
+	<record id="view_partner_form_inherit" model="ir.ui.view">
+		<field name="name">res.partner.form</field>
+		<field name="model">res.partner</field>
+		<field name="inherit_id" ref="base.view_partner_form"/>
+		<field name="arch" type="xml">
+
+			<xpath expr="//form/sheet/group/group" position="inside">
+				<field name="pan_no" />
+			</xpath>
+			
+			<xpath expr="//form/sheet/notebook/page[5]" position='after'>
+	    	<page string='Tax Deduction At Source ' >
+	    		<group>
+	    		<field name="tds_account_lines" string="Tax" >
+                    <tree string="Taxe" editable="bottom">
+                        <field name="tax_id" domain="[('tds_active', '=', True)]"/>
+                        <field name="concession_tds_code_id" readonly='1' force_save="1"/>
+                        <field name="pan_tds_in" readonly='1' force_save="1"/>
+                        <field name="amount" readonly='1' force_save="1"/>
+                    </tree>
+                </field>
+            </group>
+				
+			</page>
+			</xpath>
+		</field>
+	</record>
+
+
+
+	<!-- <record id="view_purchase_order_form_inherit" model="ir.ui.view">
+		<field name="name">purchase.order.form</field>
+		<field name="model">purchase.order</field>
+		<field name="inherit_id" ref="purchase.purchase_order_form"/>
+		<field name="arch" type="xml">
+			<xpath expr="//form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='taxes_id']" position='before'>
+				<field name="apply_tds"  />
+	    	</xpath>
+		</field>
+	</record> -->
+
+
+	<record id="view_move_form_inherit_1" model="ir.ui.view">
+		<field name="name">account.move.form</field>
+		<field name="model">account.move</field>
+		<field name="inherit_id" ref="account.view_move_form"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='line_ids']/tree/field[@name='tax_ids']" position='before'>
+				<field name="apply_tds" attrs="{'column_invisible': [('parent.move_type', 'not in', ('in_invoice', 'in_refund', 'in_receipt'))]}"/>
+<!--				<field name="apply_tds" attrs="{'column_invisible': [('parent.type', 'not in', ('in_invoice', 'in_refund', 'in_receipt'))]}"/>-->
+	    	</xpath>
+		</field>
+	</record>
+
+
+<menuitem 
+	action="action_concession_code_form" 
+	id="menu_action_concession_code" 
+	parent="account.account_account_menu" 
+	groups="account.group_account_user"
+/>
+
+<menuitem 
+	action="action_tds_form_section" 
+	id="menu_action_tds_section" 
+	parent="account.account_account_menu" 
+	groups="account.group_account_user"
+/>
+
+<menuitem 
+	action="action_tds_form" 
+	id="menu_action_tds_form" 
+	parent="account.account_account_menu" 
+	groups="account.group_account_user"
+/>
+
+<menuitem 
+	action="action_tds_nature_deduction_form" 
+	id="menu_action_tds_nature_deduction_form" 
+	parent="account.account_account_menu" 
+	groups="account.group_account_user"
+/>
+
+
+</odoo>

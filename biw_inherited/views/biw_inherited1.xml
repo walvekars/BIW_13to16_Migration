@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <menuitem
+            id="account.menu_action_move_in_refund_type"
+            action="account.action_move_in_refund_type"
+            parent="account.menu_finance_payables"
+            name="Debit Notes"
+            sequence="1"/>
+</odoo>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="action_hsbc_api_logs" model="ir.actions.act_window">
+        <field name="name">Hsbc Api Logs</field>
+        <field name="res_model">hsbc.api.log</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+            </p>
+        </field>
+    </record>
+
+    <record id="hsbc_api_logs_tree_view" model="ir.ui.view">
+        <field name="name">hsbc.api.logs.tree.view</field>
+        <field name="model">hsbc.api.log</field>
+        <field name="arch" type="xml">
+            <tree create="0" edit="0" delete="0">
+                <field name="date_sent"/>
+                <field name="date_respond"/>
+                <field name="type"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="hsbc_api_logs_form_view">
+        <field name="name">hsbc.api.logs.form</field>
+        <field name="model">hsbc.api.log</field>
+        <field name="arch" type="xml">
+            <form create="0" edit="0" delete="0">
+                <header>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <label for="type"/><field name="type"/>
+                            <label for="date_sent"/><field name="date_sent"/>
+                            <label for="date_respond"/><field name="date_respond"/>
+                            <label for="request_xml"/><field name="request_xml"/>
+                        <group>
+                        </group>
+                            <label for="response"/><field name="response"/>
+                            <label for="response_data"/><field name="response_data"/>
+                            <label for="response_ref"/><field name="response_ref"/>
+                            <label for="batch_ref"/><field name="batch_ref"/>
+                            <label for="verified"/><field name="verified"/>
+                            <label for="failure_stack"/><field name="failure_stack"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="payments_ids"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <menuitem
+            id="menu_hsbc_api_logs"
+            name="HSBC API Logs"
+            action="action_hsbc_api_logs"
+            parent="account.menu_finance_configuration"
+            sequence="100"/>
+
+</odoo>

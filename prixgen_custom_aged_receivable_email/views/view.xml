@@ -1,0 +1,72 @@
+<odoo>
+    <data>
+<!--         <template id="account_reports_backend_custom" inherit_id="web.assets_backend" active="True">-->
+<!--            <xpath expr="." position="inside">-->
+<!--                <script type="text/javascript" src="/prixgen_custom_aged_receivable_email/static/src/js/receivable_report.js"></script>-->
+<!--                <link rel="stylesheet" type="text/scss" href="/account_reports/static/src/scss/account_financial_report.scss"/>-->
+<!--            </xpath>-->
+<!--        </template>-->
+
+        <record id="action_sales_register" model="ir.actions.client">
+            <field name="name">Sales Register</field>
+            <field name="tag">account_report</field>
+            <field name="context" eval="{'model': 'sales.register'}" />
+        </record>
+
+        <menuitem id="menu_action_sales_register" name="Sales Register" action="action_sales_register" parent="account_reports.account_reports_partners_reports_menu"/>
+
+        <template id="search_template_fully_paid" inherit_id="account_reports.search_template_extra_options">
+            <xpath expr="//div[@role='menu']" position="inside">
+                <a role="menuitem" class="dropdown-item js_account_report_bool_filter" t-if="options.get('fully_paid') != None" title="Fully Paid" data-filter="fully_paid" groups="account.group_account_user">Outstanding ONLY</a>
+                <a role="menuitem" class="dropdown-item js_account_report_bool_filter" t-if="options.get('payment_date_filter') != None" title="Payment Date" data-filter="payment_date_filter" groups="account.group_account_user">Filter by Payments date</a>
+            </xpath>
+            <xpath expr="." position="attributes"><attribute name="t-name">prixgen_custom_aged_receivable_email.search_template_fully_paid</attribute></xpath>
+        </template>
+
+        <template id="sales_register_template">
+
+<!--            <a type="button" class="dropdown-toggle" data-toggle="dropdown">-->
+<!--                <span class="fa fa-calendar" title="Dates" role="img" aria-label="Dates"/>-->
+<!--                <t t-if="options['date'].get('string') and options['date'].get('filter') != 'custom'"><t t-esc="options['date']['string']"/></t>-->
+<!--                <t t-if="options['date'].get('filter') == 'custom'">-->
+<!--                    <t t-if="options['date']['mode'] == 'single'">Date: <span class="js_format_date"><t t-esc="options['date']['date_to']"/></span></t>-->
+<!--                    <t t-if="options['date']['mode'] == 'range'">From: <span class="js_format_date"><t t-esc="options['date']['date_from']"/></span> <br/><span class="o_reports_date_to">to: <span class="js_format_date"><t t-esc="options['date']['date_to']"/></span></span></t>-->
+<!--                </t>-->
+<!--            </a>-->
+
+
+            <div style="overflow-x:scroll;">
+            <table class="table table-bordered table-responsive table-striped">
+                <thead class="thead-light">
+                    <tr>
+                        <t t-foreach="header_columns" t-as="head_col">
+                            <th><t t-esc="head_col['name']"/></th>
+                        </t>
+                    </tr>
+                </thead>
+                <t t-set="col" t-value="len(header_columns)"/>
+                <t t-foreach="lines" t-as="line">
+                    <tr>
+                        <t t-foreach="range(col)" t-as="i">
+                            <td><t t-esc="line[str(i)]"/></td>
+                        </t>
+                    </tr>
+                </t>
+            </table>
+            </div>
+        </template>
+
+        <record model="ir.ui.view" id="view_account_payment_form_inherit_advance">
+            <field name="name">account.payment.form.inherit.advance</field>
+            <field name="inherit_id" ref="account.view_account_payment_form"/>
+            <field name="model">account.payment</field>
+            <field name="arch" type="xml">
+                
+                <field name="journal_id" position="after">
+                    <field name="payment_receivable"/>
+                </field>
+            </field>
+       </record>
+
+    </data>
+</odoo>

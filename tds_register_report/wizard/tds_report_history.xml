@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+   
+    <record id="tds_report_view_form" model="ir.ui.view">
+        <field name="name">tds.register.report.form</field>
+        <field name="model">tds.register.report</field>
+        <field name="arch" type="xml">
+            <form string="Tds Summary">
+                <group>
+                    <field name="tds_report_printed" invisible="1"/> 
+                  <group attrs="{'invisible':[('tds_report_printed','=',True)]}"> 
+                      <field name="date_start"/>
+                  </group>
+                  <group attrs="{'invisible':[('tds_report_printed','=',True)]}"> 
+                      <field name="date_end"/>
+                  </group>                  
+              </group>
+              <group attrs="{'invisible':[('tds_report_printed','=',False)]}">
+                      <field name="file_name" invisible="1"/>
+                      <field name="tds_report" readonly="1" filename="file_name"/>
+              </group>
+                <footer>
+                    <!-- <button string="GET PDF REPORT" type="object" name="get_summary" class="oe_highlight"/> -->
+                    <button string="GET XLS REPORT" type="object" name="get_summary" class="oe_highlight" attrs="{'invisible':[('tds_report_printed','=',True)]}"/>
+                    <button string="Cancel" special="cancel" type="object" class="btn btn-secondary oe_inline"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_to_tds_report" model="ir.actions.act_window">
+        <field name="name">TDS Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">tds.register.report</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="tds_report_view_form"/>
+        <field name="target">new</field>
+    </record>
+
+
+ 
+ <menuitem id="menu_tds_report_action"
+        name="TDS Report"
+        parent="account.account_reports_management_menu"
+        action="action_to_tds_report"
+        sequence= "700"
+      />
+       
+</odoo>
+
+
+

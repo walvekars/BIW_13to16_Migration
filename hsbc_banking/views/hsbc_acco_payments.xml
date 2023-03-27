@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="confirm_hsbc_payments_cust" model="ir.actions.server">
+        <field name="name">Confirm HSBC Payments</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="model_hsbc_account_payment"/>
+        <field name="binding_model_id" ref="model_hsbc_account_payment"/>
+        <field name="state">code</field>
+        <field name="code">records.confirm_hsbc_payments()</field>
+    </record>
+
+    <record id="action_hsbc_acc_payment_custed_again" model="ir.actions.act_window">
+        <field name="name">HSBC Payments</field>
+        <field name="res_model">hsbc.account.payment</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+            </p>
+        </field>
+    </record>
+
+
+    <record id="hsbc_account_payment_type_tree_view" model="ir.ui.view">
+        <field name="name">hsbc.account.payment.type.tree.view</field>
+        <field name="model">hsbc.account.payment</field>
+        <field name="arch" type="xml">
+            <tree create="0" edit="0" delete="0">
+                <field name="account_payment"/>
+                <field name="partners"/>
+                <field name="hsbc_users"/>
+                <field name="amount"/>
+                <field name="create_time"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="hsbc_account_payment_type_form_view">
+        <field name="name">hsbc.account.payment.type.form.view</field>
+        <field name="model">hsbc.account.payment</field>
+        <field name="arch" type="xml">
+            <form create="0" edit="1" delete="0">
+                <sheet>
+                    <group>
+                        <field name="account_payment"/>
+                        <field name="partners"/>
+                        <field name="hsbc_users"/>
+                        <field name="amount"/>
+                        <field name="create_time"/>
+                        <field name="all_logs" readonly="1"/>
+                        <field name="state"/>
+                        <field name="transaction_refs"/>
+                        <field name="errors_log"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!--    <record id="action_hsbc_acc_payment_type" model="ir.actions.act_window">-->
+    <!--        <field name="name">Hsbc Account Payment Type</field>-->
+    <!--        <field name="res_model">hsbc.account.type</field>-->
+    <!--        <field name="view_mode">tree,form</field>-->
+    <!--        &lt;!&ndash;        <field name="view_id" ref="customer_details_tree"/>&ndash;&gt;-->
+    <!--        <field name="help" type="html">-->
+    <!--            <p class="o_view_nocontent_smiling_face">-->
+    <!--            </p>-->
+    <!--        </field>-->
+    <!--    </record>-->
+
+    <menuitem
+            id="menu_hsbc_bank_payment"
+            name="HSBC Bank Payments"
+            action="action_hsbc_acc_payment_custed_again"
+            parent="account.root_payment_menu"
+            sequence="20"/>
+
+</odoo>

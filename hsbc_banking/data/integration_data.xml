@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="hsbc_url" model="ir.config_parameter">
+            <field name="key">hsbc.api.url</field>
+            <field name="value">.</field>
+        </record>
+
+        <record id="hsbc_payments_status_url" model="ir.config_parameter">
+            <field name="key">hsbc.payments.status.api.url</field>
+            <field name="value">.</field>
+        </record>
+
+        <record id="hsbc_client_id" model="ir.config_parameter">
+            <field name="key">hsbc.client.id</field>
+            <field name="value">.</field>
+        </record>
+
+        <record id="hsbc_client_secret" model="ir.config_parameter">
+            <field name="key">hsbc.client.secret</field>
+            <field name="value">.</field>
+        </record>
+
+        <record id="hsbc_profile_id" model="ir.config_parameter">
+            <field name="key">hsbc.profile.id</field>
+            <field name="value">.</field>
+        </record>
+
+        <record id="hsbc_payload_type" model="ir.config_parameter">
+            <field name="key">hsbc.payload.type</field>
+            <field name="value">pain.001.001.03</field>
+        </record>
+
+        <record id="hsbc_public_key" model="ir.config_parameter">
+            <field name="key">hsbc.public.key</field>
+            <field name="value">.</field>
+        </record>
+
+        <record id="biw_private_key" model="ir.config_parameter">
+            <field name="key">biw.private.key</field>
+            <field name="value">.</field>
+        </record>
+
+        <record id="biw_key_passphrase" model="ir.config_parameter">
+            <field name="key">biw.key.passphrase</field>
+            <field name="value">.</field>
+        </record>
+
+    </data>
+</odoo>

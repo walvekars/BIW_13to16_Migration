@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="account_asset_inherit" model="ir.ui.view">
+        <field name="model">account.asset</field>
+        <field name="inherit_id" ref="account_asset.view_account_asset_expense_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='analytic_distribution']" position="after">
+                <field name="dimension_id"/>
+            </xpath>
+            <xpath expr="//field[@name='acquisition_date']" position="after">
+                    <div>
+                        <field name="date_from_cst" class="oe_inline"/> - <field name="date_to_cst" class="oe_inline"/>
+                    </div>
+                   
+                
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
